@@ -1,0 +1,11 @@
+/var/log/space_weather.log {
+	daily
+	size 128M
+	missingok
+	rotate 12
+	compress
+	dateext
+	dateformat -%Y%m%d-%s
+	notifempty
+}
+

@@ -1,0 +1,12 @@
+Source: space-weather-getter
+Priority: extra
+Maintainer: Oleg Kutkov <kutkov.o@yandex.ru>
+Standards-Version: 3.8.4
+
+Package: space-weather-getter
+Architecture: all
+Depends:
+ python (>= 2.5),
+ python-matplotlib,
+ python-tk
+Description: Space weather data getter and graphs builder

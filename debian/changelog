@@ -1,0 +1,11 @@
+space-weather-getter (0.1-1) unstable; urgency=medium
+
+  * 8-days range for geomag activity
+
+ -- Oleg Kutkov <oleg@asgard>  Tue, 19 May 2015 23:49:21 +0300
+
+space-weather-getter (0.1-0) unstable; urgency=medium
+
+  * Initial release
+
+ -- Oleg Kutkov <oleg@oleg-Aspire-5315>  Fri, 24 Apr 2015 00:57:20 +0300

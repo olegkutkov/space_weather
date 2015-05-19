@@ -1,0 +1,9 @@
+src/common.py /opt/space_weather
+src/config.py /opt/space_weather
+src/date_util.py /opt/space_weather
+src/ftp_utils.py /opt/space_weather
+src/geomag.py /opt/space_weather
+src/getter.py /opt/space_weather
+src/proton_flux.py /opt/space_weather
+src/xray.py /opt/space_weather
+src/strings.py /opt/space_weather

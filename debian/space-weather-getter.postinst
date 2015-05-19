@@ -1,0 +1,4 @@
+#!/bin/bash
+
+/opt/space_weather/getter.py 2>&1 >> /var/log/space_weather.log
+
