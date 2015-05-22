@@ -83,7 +83,7 @@ def build_proton_flux_graph(curr_file, prev_file, left_hours, dt_util):
 		ydata.append(hvp.itervalues().next())
 
 		if xval_str[2:] == '00':
-			localized_xval = int(str(xval)[:2]) + int(dt_util.get_local_offset_from_utc())
+			localized_xval = int(str(xval)[:2]) #+ int(dt_util.get_local_offset_from_utc())
 
 			if localized_xval > 24:
 				localized_xval = localized_xval - 24
@@ -104,13 +104,10 @@ def build_proton_flux_graph(curr_file, prev_file, left_hours, dt_util):
 	y_formatter = matplotlib.ticker.FixedFormatter(strings.proton_y_ticks_left)
 	ax1.yaxis.set_major_formatter(y_formatter)
 
-	x_formatter = matplotlib.ticker.FixedFormatter(x_hour_labels)
-	ax1.xaxis.set_major_formatter(x_formatter)
-
 	plt.plot(t, ydata, color='r', linewidth=2)
 	plt.grid(axis='y', linestyle='-')
 	plt.grid(axis='x', linestyle='-')
-	plt.xticks(np.arange(0, t[-1] + 5.5, 12))
+
 	plt.yticks(np.arange(0, 1.5e+02, 8.0))
 
 	plt.xticks(rotation = config.PLOT_XTICKS_ROTATION)
@@ -121,12 +118,24 @@ def build_proton_flux_graph(curr_file, prev_file, left_hours, dt_util):
 	if left_hours != 0:
 		date_str = dt_util.get_utc_prev_day_ymd_str_pretty() + ' - ' + date_str
 
-	plt.xlabel(strings.proton_x_labe_part + date_str)
+	plt.xlabel('\n' + strings.proton_x_labe_part + date_str + ' UTC+0')
 
 	ax2 = ax1.twinx()
 	ax2.set_ylim(-1, 1.5e+01)
 	y2_formatter = matplotlib.ticker.FixedFormatter(strings.proton_y_ticks_right)
 	ax2.yaxis.set_major_formatter(y2_formatter)
+
+	x_formatter = matplotlib.ticker.FixedFormatter(x_hour_labels)
+	ax1.xaxis.set_major_formatter(x_formatter)
+
+	for tick in ax1.get_xaxis().get_major_ticks():
+		tick.set_pad(12.)
+		tick.label1 = tick._get_text1()
+
+        for tick in ax1.get_xticklabels():
+                tick.set_rotation(config.PLOT_XTICKS_ROTATION)
+
+	plt.xticks(np.arange(0, t[-1] + 5.5, 12))
 
 	plt.title(strings.protong_title)
 	plt.tight_layout()
@@ -134,7 +143,7 @@ def build_proton_flux_graph(curr_file, prev_file, left_hours, dt_util):
 	out_file = config.FILES_WORK_DIR + '/' + config.PROTON_FLUX_OUT_FILE
 
 	print 'Plot was generated and saved as ' + out_file
-	plt.savefig(out_file, dpi = config.PLOT_DPI)
+	plt.savefig(out_file, dpi = config.PLOT_DPI, bbox_inches='tight')
 
 	#plt.show()
 
@@ -168,7 +177,7 @@ def process_proton_flux_data():
 
 	dow_ftp.close()
 
-	left_hours = dt_util.get_left_hours_in_curr_day() - dt_util.get_local_offset_from_utc()
+	left_hours = dt_util.get_left_hours_in_curr_day() #- dt_util.get_local_offset_from_utc()
 
 	if left_hours < 0:
 		left_hours = 0

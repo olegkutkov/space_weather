@@ -22,6 +22,6 @@ dt_util = date_util.DateUtil()
 print '\n *** Session started at ' + dt_util.get_pretty_ymd_str() + ' *** '
 
 proton_flux.process_proton_flux_data()
-#xray.process_xray_data()
-#geomag.process_geomag_data()
+xray.process_xray_data()
+geomag.process_geomag_data()
 

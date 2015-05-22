@@ -88,19 +88,10 @@ def build_geomag_plot(week_geomag_file, two_days_geomag_file):
 	x_day_labels = x_day_labels[::-1]
 
 	x_formatter = matplotlib.ticker.FixedFormatter(x_day_labels)
-	ax1.xaxis.set_major_formatter(x_formatter)
-
-	for tick in ax1.get_xaxis().get_major_ticks():
-		tick.set_pad(9.)
-		tick.label1 = tick._get_text1()
 
 	plt.plot(t, y, color='g', linewidth=4)
 	plt.grid(axis='y', linestyle='-')
 	plt.grid(axis='x', linestyle='-')
-
-	plt.xticks(np.arange(0, t[-1] + 1, 7.75))
-
-	plt.xticks(rotation = 90)
 
 	plt.ylabel(u'Kp')
 
@@ -109,6 +100,17 @@ def build_geomag_plot(week_geomag_file, two_days_geomag_file):
 	y2_formatter = matplotlib.ticker.FixedFormatter(strings.geomag_y_ticks_right)
 	ax2.yaxis.set_major_formatter(y2_formatter)
 
+	ax1.xaxis.set_major_formatter(x_formatter)
+
+	for tick in ax1.get_xaxis().get_major_ticks():
+		tick.set_pad(9.)
+		tick.label1 = tick._get_text1()
+
+	for tick in ax1.get_xticklabels():
+		tick.set_rotation(90)
+
+	plt.xticks(np.arange(0, t[-1] + 1, 7.75))
+
 	plt.title(strings.geomag_plot_title)
 	plt.tight_layout()
 
@@ -116,7 +118,7 @@ def build_geomag_plot(week_geomag_file, two_days_geomag_file):
 
 	print 'Plot was generated and saved as ' + out_file
 
-	plt.savefig(out_file, dpi = config.PLOT_DPI)
+	plt.savefig(out_file, dpi = config.PLOT_DPI, bbox_inches='tight')
 
 	#plt.show()
 

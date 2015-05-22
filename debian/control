@@ -7,6 +7,5 @@ Package: space-weather-getter
 Architecture: all
 Depends:
  python (>= 2.5),
- python-matplotlib,
- python-tk
+ python-matplotlib
 Description: Space weather data getter and graphs builder
